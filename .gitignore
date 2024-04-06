@@ -1,0 +1,6 @@
+/target
+*.svg
+perf.*
+.gdb_history
+/.mypy_cache
+/__pycache__
