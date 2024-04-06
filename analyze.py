@@ -22,7 +22,7 @@ class bcolors:
 # =------------------------------------------------------------= #
 
 
-def analyze_inter_async(sender_threshold, receiver_threshold):
+def analyze_inter_async(bins, sender_threshold, receiver_threshold):
 
     available_colors = ["#21fced", "#21fc80", "#fc2130", "#219efc", "#ed21fc", "#8021fc", "#30fc21", "#fc8021", "#FFFF00", "#FDECA0", "#FF00FF", "#00FFFF", "#FF0000", "#00FF00", "#0000FF", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF"]
 
@@ -74,7 +74,6 @@ def analyze_inter_async(sender_threshold, receiver_threshold):
             aggregate_data = pd.concat([aggregate_data, recv_data])
         # =------------------------------------------------------------= #
 
-        bins = 250
         alpha = 0.25
 
         # get color from available colors
@@ -106,7 +105,7 @@ def analyze_inter_async(sender_threshold, receiver_threshold):
     plt.show()
 
 
-def analyze_inter_busy(sender_threshold, receiver_threshold):
+def analyze_inter_busy(bins, sender_threshold, receiver_threshold):
 
     available_colors = ["#21fced", "#21fc80", "#fc2130", "#219efc", "#ed21fc", "#8021fc", "#30fc21", "#fc8021", "#FFFF00", "#FDECA0", "#FF00FF", "#00FFFF", "#FF0000", "#00FF00", "#0000FF", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF"]
 
@@ -158,7 +157,6 @@ def analyze_inter_busy(sender_threshold, receiver_threshold):
             aggregate_data = pd.concat([aggregate_data, recv_data])
         # =------------------------------------------------------------= #
 
-        bins = 250
         alpha = 0.25
 
         # get color from available colors
@@ -190,7 +188,7 @@ def analyze_inter_busy(sender_threshold, receiver_threshold):
     plt.show()
 
 
-def analyze_intra_async_single_thread(sender_threshold, receiver_threshold):
+def analyze_intra_async_single_thread(bins, sender_threshold, receiver_threshold):
 
     available_colors = ["#21fced", "#21fc80", "#fc2130", "#219efc", "#ed21fc", "#8021fc", "#30fc21", "#fc8021", "#FFFF00", "#FDECA0", "#FF00FF", "#00FFFF", "#FF0000", "#00FF00", "#0000FF", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF"]
 
@@ -242,7 +240,6 @@ def analyze_intra_async_single_thread(sender_threshold, receiver_threshold):
             aggregate_data = pd.concat([aggregate_data, recv_data])
         # =------------------------------------------------------------= #
 
-        bins = 250
         alpha = 0.25
 
         # get color from available colors
@@ -274,7 +271,7 @@ def analyze_intra_async_single_thread(sender_threshold, receiver_threshold):
     plt.show()
 
 
-def analyze_intra_async_multi_thread(sender_threshold, receiver_threshold):
+def analyze_intra_async_multi_thread(bins, sender_threshold, receiver_threshold):
 
     available_colors = ["#21fced", "#21fc80", "#fc2130", "#219efc", "#ed21fc", "#8021fc", "#30fc21", "#fc8021", "#FFFF00", "#FDECA0", "#FF00FF", "#00FFFF", "#FF0000", "#00FF00", "#0000FF", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF", "#FF80FF", "#80FFFF", "#FF80FF", "#FFFF80", "#FF8000", "#FF0080", "#80FF00", "#80FF00", "#0080FF", "#8000FF", "#FF8080", "#80FF80", "#8080FF"]
 
@@ -326,7 +323,6 @@ def analyze_intra_async_multi_thread(sender_threshold, receiver_threshold):
             aggregate_data = pd.concat([aggregate_data, recv_data])
         # =------------------------------------------------------------= #
 
-        bins = 250
         alpha = 0.25
 
         # get color from available colors
@@ -366,6 +362,8 @@ def analyze_intra_async_multi_thread(sender_threshold, receiver_threshold):
 # 1000ns = 1us
 # 1000us = 1ms
 
+bins = 150
+
 inter_async_sender_threshold = 15000
 inter_async_receiver_threshold = 40000
 
@@ -378,7 +376,7 @@ intra_async_single_thread_receiver_threshold = 75000
 intra_async_multi_thread_sender_threshold = 7500
 intra_async_multi_thread_receiver_threshold = 60000
 
-analyze_inter_async(inter_async_sender_threshold, inter_async_receiver_threshold)
-analyze_inter_busy(inter_busy_sender_threshold, inter_busy_receiver_threshold)
-analyze_intra_async_single_thread(intra_async_single_thread_sender_threshold, intra_async_single_thread_receiver_threshold)
-analyze_intra_async_multi_thread(intra_async_multi_thread_sender_threshold, intra_async_multi_thread_receiver_threshold)
+analyze_inter_async(bins, inter_async_sender_threshold, inter_async_receiver_threshold)
+analyze_inter_busy(bins, inter_busy_sender_threshold, inter_busy_receiver_threshold)
+analyze_intra_async_single_thread(bins, intra_async_single_thread_sender_threshold, intra_async_single_thread_receiver_threshold)
+analyze_intra_async_multi_thread(bins, intra_async_multi_thread_sender_threshold, intra_async_multi_thread_receiver_threshold)
