@@ -2,6 +2,9 @@
 
 Deploy on server to determine which public crates are the fastest for communicating in different architectures
 
+### Requirements:
+- 2 CPUs are needed for most of the experiments. Please refer to `main()` to change which cores you'd like to be utilized before running.
+
 ## Analysis Pipeline
 1. `cargo run --release`
 2. Once the experiments are completed, run `python3 analyze.py` to view the results and the corresponding latency distributions
