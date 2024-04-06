@@ -658,6 +658,7 @@ def analyze_intra_async_multi_thread(
 # 1000us = 1ms
 
 bins = 150
+show_graph = False
 
 inter_async_sender_threshold = 15000
 inter_async_receiver_threshold = 40000
@@ -671,15 +672,17 @@ intra_async_single_thread_receiver_threshold = 75000
 intra_async_multi_thread_sender_threshold = 7500
 intra_async_multi_thread_receiver_threshold = 60000
 
-analyze_inter_async(bins, inter_async_sender_threshold, inter_async_receiver_threshold)
-analyze_inter_busy(bins, inter_busy_sender_threshold, inter_busy_receiver_threshold)
+analyze_inter_async(bins, inter_async_sender_threshold, inter_async_receiver_threshold, show_graph)
+analyze_inter_busy(bins, inter_busy_sender_threshold, inter_busy_receiver_threshold, show_graph)
 analyze_intra_async_single_thread(
     bins,
     intra_async_single_thread_sender_threshold,
     intra_async_single_thread_receiver_threshold,
+    show_graph,
 )
 analyze_intra_async_multi_thread(
     bins,
     intra_async_multi_thread_sender_threshold,
     intra_async_multi_thread_receiver_threshold,
+    show_graph,
 )
