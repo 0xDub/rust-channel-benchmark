@@ -8,22 +8,6 @@ mod utils;
 use utils::{CL, FileHandler};
 
 
-//////////////////////////////////////
-// ================================ //
-// Objectives:                      //
-// -------------------------------- //
-// Inter-process communication      //
-// - await (asynchnous)             //
-// - busy spinning (synchronous)    //
-// -------------------------------- //
-// Intra-process communication      //
-// - async (single-thread)          //
-// - async (multi-thread)           //
-// ================================ //
-//////////////////////////////////////
-
-
-
 // =-= Experiments =-=-= //
 
 #[derive(Debug)]
@@ -1210,9 +1194,6 @@ fn intra_process_async_multi_thread(sample_size: i64, payload_size_in_bytes: i64
 fn intra_process_async_single_thread(sample_size: i64, payload_size_in_bytes: i64, cpu_0: usize) {
     CL::Teal.print("[+][Intra-Process][Async-Single-Thread] Starting");
 
-    // this experiment differs a bit. instead of creating and pinning a thread to a core, we assume that people going the intra-process 
-    // route will be using a runtime over multiple cores. so, we'll create a multi-threaded runtime which will create worker threads equal
-    // to the number of cores on the machine. this way, we can simulate the intra-process async scenario.
     let sender_handle = std::thread::spawn(move || { // create a system thread
         let res = core_affinity::set_for_current(core_affinity::CoreId { id: cpu_0 }); // pin thread to specific core
         if res {
