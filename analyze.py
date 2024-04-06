@@ -87,11 +87,18 @@ def analyze_inter_async(sender_threshold, receiver_threshold):
     for direction in ["sender", "receiver"]:
         print()
         print(bcolors.OKGREEN + f"=-------------= {direction.capitalize()} | Latencies =-------------=" + bcolors.ENDC)
-        for method in methods:
-            data = aggregate_data[(aggregate_data["method"] == method) & (aggregate_data["direction"] == direction)]
+        pre_sorted_data = aggregate_data[(aggregate_data["direction"] == direction)]
+        # group by method, calculate mean of latency, then sort by mean latency
+        pre_sorted_data = pre_sorted_data.groupby("method").agg({"latency": ["mean", "median", "std"]}).reset_index()
+        sorted_by_mean = pre_sorted_data.sort_values(by=[("latency", "mean")])
+        for _, row in sorted_by_mean.iterrows():
+            method = row["method"].iloc[0]
+            mean_latency = format(row[("latency", "mean")] / 1000, '.2f')
+            median_latency = format(row[("latency", "median")] / 1000, '.2f')
+            std_latency = format(row[("latency", "std")] / 1000, '.2f')
             # format the lines to be more readable
             padding = " " * (20 - len(method))
-            print(f"{method}{padding}| mu: {round(data['latency'].mean())}ns | std: {round(data['latency'].std())}ns")
+            print(f"{method}{padding}| mu: {mean_latency}us | median: {median_latency}us | std: {std_latency}us")
 
 
     sender_ax.legend()
@@ -164,11 +171,18 @@ def analyze_inter_busy(sender_threshold, receiver_threshold):
     for direction in ["sender", "receiver"]:
         print()
         print(bcolors.OKGREEN + f"=-------------= {direction.capitalize()} | Latencies =-------------=" + bcolors.ENDC)
-        for method in methods:
-            data = aggregate_data[(aggregate_data["method"] == method) & (aggregate_data["direction"] == direction)]
+        pre_sorted_data = aggregate_data[(aggregate_data["direction"] == direction)]
+        # group by method, calculate mean of latency, then sort by mean latency
+        pre_sorted_data = pre_sorted_data.groupby("method").agg({"latency": ["mean", "median", "std"]}).reset_index()
+        sorted_by_mean = pre_sorted_data.sort_values(by=[("latency", "mean")])
+        for _, row in sorted_by_mean.iterrows():
+            method = row["method"].iloc[0]
+            mean_latency = format(row[("latency", "mean")] / 1000, '.2f')
+            median_latency = format(row[("latency", "median")] / 1000, '.2f')
+            std_latency = format(row[("latency", "std")] / 1000, '.2f')
             # format the lines to be more readable
             padding = " " * (20 - len(method))
-            print(f"{method}{padding}| mu: {round(data['latency'].mean())}ns | std: {round(data['latency'].std())}ns")
+            print(f"{method}{padding}| mu: {mean_latency}us | median: {median_latency}us | std: {std_latency}us")
 
 
     sender_ax.legend()
@@ -241,11 +255,18 @@ def analyze_intra_async_single_thread(sender_threshold, receiver_threshold):
     for direction in ["sender", "receiver"]:
         print()
         print(bcolors.OKGREEN + f"=-------------= {direction.capitalize()} | Latencies =-------------=" + bcolors.ENDC)
-        for method in methods:
-            data = aggregate_data[(aggregate_data["method"] == method) & (aggregate_data["direction"] == direction)]
+        pre_sorted_data = aggregate_data[(aggregate_data["direction"] == direction)]
+        # group by method, calculate mean of latency, then sort by mean latency
+        pre_sorted_data = pre_sorted_data.groupby("method").agg({"latency": ["mean", "median", "std"]}).reset_index()
+        sorted_by_mean = pre_sorted_data.sort_values(by=[("latency", "mean")])
+        for _, row in sorted_by_mean.iterrows():
+            method = row["method"].iloc[0]
+            mean_latency = format(row[("latency", "mean")] / 1000, '.2f')
+            median_latency = format(row[("latency", "median")] / 1000, '.2f')
+            std_latency = format(row[("latency", "std")] / 1000, '.2f')
             # format the lines to be more readable
             padding = " " * (20 - len(method))
-            print(f"{method}{padding}| mu: {round(data['latency'].mean())}ns | std: {round(data['latency'].std())}ns")
+            print(f"{method}{padding}| mu: {mean_latency}us | median: {median_latency}us | std: {std_latency}us")
 
 
     sender_ax.legend()
@@ -319,11 +340,18 @@ def analyze_intra_async_multi_thread(sender_threshold, receiver_threshold):
     for direction in ["sender", "receiver"]:
         print()
         print(bcolors.OKGREEN + f"=-------------= {direction.capitalize()} | Latencies =-------------=" + bcolors.ENDC)
-        for method in methods:
-            data = aggregate_data[(aggregate_data["method"] == method) & (aggregate_data["direction"] == direction)]
+        pre_sorted_data = aggregate_data[(aggregate_data["direction"] == direction)]
+        # group by method, calculate mean of latency, then sort by mean latency
+        pre_sorted_data = pre_sorted_data.groupby("method").agg({"latency": ["mean", "median", "std"]}).reset_index()
+        sorted_by_mean = pre_sorted_data.sort_values(by=[("latency", "mean")])
+        for _, row in sorted_by_mean.iterrows():
+            method = row["method"].iloc[0]
+            mean_latency = format(row[("latency", "mean")] / 1000, '.2f')
+            median_latency = format(row[("latency", "median")] / 1000, '.2f')
+            std_latency = format(row[("latency", "std")] / 1000, '.2f')
             # format the lines to be more readable
             padding = " " * (20 - len(method))
-            print(f"{method}{padding}| mu: {round(data['latency'].mean())}ns | std: {round(data['latency'].std())}ns")
+            print(f"{method}{padding}| mu: {mean_latency}us | median: {median_latency}us | std: {std_latency}us")
 
 
     sender_ax.legend()
@@ -334,21 +362,21 @@ def analyze_intra_async_multi_thread(sender_threshold, receiver_threshold):
 # =------------------------------------------------------------= #
 # Definitely a cleaner way to do this, but I'm in a rush for now
 
-# Thresholds are in nanoseconds (ns)
+# Thresholds are used to cut off outliers in latency (if desired), there are denoted in nanoseconds (ns)
 # 1000ns = 1us
 # 1000us = 1ms
 
-inter_async_sender_threshold = 1000000
-inter_async_receiver_threshold = 1000000
+inter_async_sender_threshold = 15000
+inter_async_receiver_threshold = 40000
 
-inter_busy_sender_threshold = 1000000
-inter_busy_receiver_threshold = 1000000
+inter_busy_sender_threshold = 7500
+inter_busy_receiver_threshold = 15000
 
-intra_async_single_thread_sender_threshold = 1000000
-intra_async_single_thread_receiver_threshold = 1000000
+intra_async_single_thread_sender_threshold = 7500
+intra_async_single_thread_receiver_threshold = 75000
 
-intra_async_multi_thread_sender_threshold = 1000000
-intra_async_multi_thread_receiver_threshold = 1000000
+intra_async_multi_thread_sender_threshold = 7500
+intra_async_multi_thread_receiver_threshold = 60000
 
 analyze_inter_async(inter_async_sender_threshold, inter_async_receiver_threshold)
 analyze_inter_busy(inter_busy_sender_threshold, inter_busy_receiver_threshold)
